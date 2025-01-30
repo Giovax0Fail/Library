@@ -1,0 +1,34 @@
+
+<form [formGroup]="searchForm" (ngSubmit)="submitFilter()">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome del Libro</mat-label>
+      <input matInput formControlName="bookName"   maxlength="100" />
+    </mat-form-field>
+  
+
+  <mat-form-field appearance="fill">
+    <mat-label>Autore del Libro</mat-label>
+    <input matInput formControlName="bookAuthor"  maxlength="100" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>ISBN</mat-label>
+    <input matInput formControlName="bookISBN"  maxlength="13" />
+   
+  </mat-form-field>
+
+  
+    <button mat-raised-button color="primary" type="submit" class="mat-large" >
+      Invia
+    </button>
+  
+
+  
+    <button mat-raised-button color="warn" type="button" class="mat-large" (click)="onReset()">
+      Reset
+    </button>
+
+  
+</form>
+
+ 

@@ -1,0 +1,23 @@
+<!-- <nav>
+    <ul>
+      <li><a routerLink="/dashboard" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a></li>
+      <li><a routerLink="/insert-form-background" routerLinkActive="active" ariaCurrentWhenActive="page">Inserisci form</a></li>
+    </ul>
+  </nav>
+  <p>Test Menu</p>
+   -->
+   <mat-tab-group dynamicHeight (selectedTabChange)="tabChange($event)" [(selectedIndex)]="selectedIndex">
+    <mat-tab label="Home">
+      <div class="example-small-box mat-elevation-z4">
+       
+      </div>
+    </mat-tab>
+    <mat-tab label="Inserisci">
+      <div class="example-large-box mat-elevation-z4">
+        
+      </div>
+    </mat-tab>
+    
+  </mat-tab-group>
+  
+  

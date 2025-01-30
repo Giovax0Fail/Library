@@ -1,0 +1,9 @@
+<div class="title-container">
+  <h2 *ngIf="!editModeParent">Inserisci il libro</h2>
+  <h2 *ngIf="editModeParent">Modifica il libro</h2>
+</div>
+  
+  
+<app-form (booklistEventEmitter)="submitBook($event)"  [bookItemById]="bookGotById" [editModeToChild]="editModeParent" ></app-form>
+
+  

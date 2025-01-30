@@ -1,0 +1,2 @@
+<app-search (searchBookEventEmitter)="filterBooks($event)" (resetBookEventEmitter)="resetBooks($event)"></app-search>
+<app-table  (deleteItemEvent)="deleteItem($event)" (editItemEvent)="editItem($event)"  [bookItems]="booklist"></app-table>

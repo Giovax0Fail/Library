@@ -1,0 +1,43 @@
+
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()" >
+    <mat-grid-list cols="1" rowHeight="100px">
+      <mat-grid-tile>
+        <mat-form-field appearance="fill">
+          <mat-label>Nome del Libro</mat-label>
+          <input matInput formControlName="bookName"  required maxlength="100" />
+        </mat-form-field>
+      </mat-grid-tile>
+      
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill">
+          <mat-label>Autore del Libro</mat-label>
+          <input matInput formControlName="bookAuthor" required maxlength="100" />
+        </mat-form-field>
+      </mat-grid-tile>
+  
+      <mat-grid-tile>
+        <mat-form-field appearance="fill">
+          <mat-label>ISBN</mat-label>
+          <input matInput formControlName="bookISBN" required maxlength="13" />
+          <mat-error *ngIf="bookForm.value.bookISBN">ISBN non valido</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+  
+      <mat-grid-tile>
+        <mat-form-field appearance="fill">
+          <mat-label>Anno</mat-label>
+          <input matInput formControlName="year" type="number" required [min]="500" [max]="2025"/>
+          <mat-error *ngIf="bookForm.value.year">Anno non valido
+          </mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+  
+      <mat-grid-tile>
+        <button mat-raised-button color="primary" type="submit" class="mat-large" [disabled]="bookForm.invalid">
+          Invia
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+  
