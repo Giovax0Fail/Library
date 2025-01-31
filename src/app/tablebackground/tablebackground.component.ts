@@ -32,13 +32,15 @@ export class TablebackgroundComponent implements OnInit {
       (books: Book[]) => {
         this.booklist = books;
         console.log('Items libri', this.booklist);
-        // if (book) {
-        //   this._snackBar.open('Libri filtrati con successo', 'chiudi');
-        // }
+        if (this.booklist.length === 0) {
+          console.log('La lista dei libri è vuota.');
+          this.openSnackBar('Non ci sono libri con quei filtri');
+        } else {
+          console.log('Ci sono libri nella lista.');
+        }
       },
       (error: any) => {
         console.error('Errore libri', error);
-        // this._snackBar.open('Libri non filtrati', 'chiudi');
       }
     );
   }
@@ -54,7 +56,7 @@ export class TablebackgroundComponent implements OnInit {
     console.log('deleted item id', deletedItemId);
 
     this.bookService.deleteBook(deletedItemId).subscribe(() => {
-      this._snackBar.open('eliminato con successo', 'chiudi');
+      this.openSnackBar('eliminato con successo');
       this.emptyBookObj();
       this.filterBooks(this.book);
     });
@@ -81,7 +83,9 @@ export class TablebackgroundComponent implements OnInit {
     );
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+  openSnackBar(message: string, action: string = 'chiudi') {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+    });
   }
 }

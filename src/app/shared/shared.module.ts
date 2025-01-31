@@ -11,6 +11,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [MenuComponent],
   imports: [
@@ -27,6 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     MenuComponent,
@@ -39,6 +41,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTableModule,
     MatPaginatorModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class SharedModule {}

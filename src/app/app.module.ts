@@ -12,9 +12,10 @@ import { SharedModule } from './shared/shared.module';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
-import { SearchComponent } from './search/search.component'; // Aggiungi questa importazione
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { SearchComponent } from './search/search.component';
+import { LoaderComponent } from './loader/loader.component'; // Aggiungi questa importazione
+import { LoaderInterceptor } from './services/interceptors/loader.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { SearchComponent } from './search/search.component'; // Aggiungi questa 
     DashboardComponent,
     InsertFormBackgroundComponent,
     SearchComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,9 @@ import { SearchComponent } from './search/search.component'; // Aggiungi questa 
     ReactiveFormsModule,
     HttpClientModule, // Aggiungi questo modulo
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

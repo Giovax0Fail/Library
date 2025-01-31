@@ -15,7 +15,7 @@ import { Book } from '../models/book.model';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class FormComponent implements OnChanges {
+export class FormComponent implements OnInit, OnChanges {
   bookForm: FormGroup;
   book?: Book;
   @Output() booklistEventEmitter = new EventEmitter<Book>();

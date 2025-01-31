@@ -35,7 +35,7 @@ export class InsertFormBackgroundComponent implements OnInit {
           },
           (error) => {
             console.error('Errore libri', error);
-            this._snackBar.open('Id libro non trovato', 'chiudi');
+            this.openSnackBar('Id libro non trovato', 'chiudi');
           }
         );
       } else this.editModeParent = false;
@@ -55,12 +55,12 @@ export class InsertFormBackgroundComponent implements OnInit {
           if (response) {
             console.log('response subscribe add book', response);
             this.goToDash();
-            this._snackBar.open('Libro aggiunto con successo', 'chiudi');
+            this.openSnackBar('Libro aggiunto con successo');
           }
         },
         (error) => {
           console.error('Errore libri', error);
-          this._snackBar.open('Libro non aggiunto', 'chiudi');
+          this.openSnackBar('Libro non aggiunto');
         }
       );
     } else if (!!this.editModeParent) {
@@ -74,19 +74,21 @@ export class InsertFormBackgroundComponent implements OnInit {
           if (response) {
             console.log('response subscribe update book', response);
             this.goToDash();
-            this._snackBar.open('Libro modificato con successo', 'chiudi');
+            this.openSnackBar('Libro modificato con successo');
           }
         },
         (error) => {
           console.error('Errore libri', error);
-          this._snackBar.open('Libro non modificato', 'chiudi');
+          this.openSnackBar('Libro non modificato');
         }
       );
     }
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+  openSnackBar(message: string, action: string = 'chiudi') {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+    });
   }
   goToDash() {
     this.router.navigate(['/dashboard']);
