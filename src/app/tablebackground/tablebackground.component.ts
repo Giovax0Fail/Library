@@ -3,6 +3,7 @@ import { Book } from '../models/book.model';
 import { BookService } from '../services/book.service';
 import { Route, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { switchMap } from 'rxjs';
 @Component({
   selector: 'app-tablebackground',
   templateUrl: './tablebackground.component.html',
@@ -52,14 +53,47 @@ export class TablebackgroundComponent implements OnInit {
     }
   }
 
+  // deleteItem(deletedItemId: Number) {
+  //   console.log('deleted item id', deletedItemId);
+
+  //   this.bookService.deleteBook(deletedItemId).subscribe(() => {
+  //     this.openSnackBar('eliminato con successo');
+  //     this.emptyBookObj();
+  //     this.filterBooks(this.book);
+  //   });
+  // }
+
   deleteItem(deletedItemId: Number) {
     console.log('deleted item id', deletedItemId);
 
-    this.bookService.deleteBook(deletedItemId).subscribe(() => {
-      this.openSnackBar('eliminato con successo');
-      this.emptyBookObj();
-      this.filterBooks(this.book);
-    });
+    this.bookService
+      .deleteBook(deletedItemId)
+      .pipe(
+        switchMap(() => {
+          this.openSnackBar('Libro eliminato con successo');
+          this.emptyBookObj();
+          return this.bookService.getFilteredBooks(this.book);
+        })
+      )
+      .subscribe(
+        //next
+        (books: Book[]) => {
+          this.booklist = books;
+          console.log(
+            'DeleteItem: Lista aggiornata dopo eliminazione',
+            this.booklist
+          );
+        },
+        //error
+        (error: any) => {
+          console.error('DeleteItem: errore durante la cancellazione ', error);
+          this.openSnackBar("errore durante l'operazione");
+        },
+        //complete
+        () => {
+          console.log('DeleteItem: operazione completata con successo!');
+        }
+      );
   }
 
   updateBook(updatedBook: Book) {
